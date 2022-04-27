@@ -1,0 +1,65 @@
+import elColeccionista.*
+
+
+test "pedro empieza sin ningun objeto en su coleccion" {
+	
+	assert.that(pedro.noTieneNada())
+
+}
+
+test "pedro empieza su coleccion" {
+	
+	pedro.encuentra(unaOllaDeHierro)
+	assert.notThat(pedro.noTieneNada())
+
+}
+
+
+test "pedro registra todas las cosas que encuentra" {
+	
+	pedro.encuentra(unaOllaDeHierro)
+	pedro.encuentra(elCollarDeDiamantesDeLaAbuela)
+	pedro.encuentra(memoriaRamDDR)
+	
+	assert.equals(3,pedro.cuantasCosasTiene())
+
+}
+
+test "pedro encontro varias cosas, pero le robaron y se quedo sin nada" {
+	
+	pedro.encuentra(unaOllaDeHierro)
+	pedro.encuentra(elCollarDeDiamantesDeLaAbuela)
+	pedro.encuentra(memoriaRamDDR)
+	pedro.robo()
+	assert.that(pedro.noTieneNada())
+}
+
+test "La coleccion de pedro mejoraria cuando encuentra algo mas valioso" {
+	pedro.encuentra(unaOllaDeHierro)
+	pedro.encuentra(unaEstampillaDeArgentina)
+	assert.that(pedro.mejorariaLaColeccionCon(elCollarDeDiamantesDeLaAbuela))
+	}
+	
+	
+test "La coleccion de pedro no mejoraria cuando encuentra algo menos valioso" {
+	pedro.encuentra(unaOllaDeHierro)
+	pedro.encuentra(memoriaRamDDR)
+	assert.notThat(pedro.mejorariaLaColeccionCon(unLibroDeAventuras))
+	}
+	
+	
+test "La coleccion de pedro mejoraria cuando se desvaloriza lo ultimo que tenia" {
+	pedro.encuentra(unaOllaDeHierro)
+	pedro.encuentra(memoriaRamDDR)
+	memoriaRamDDR.alterarCapacidad(0.5)
+	assert.that(pedro.mejorariaLaColeccionCon(unLibroDeAventuras))
+}
+
+test "Cotizacion de la coleccion de pedro " {
+	pedro.encuentra(unaOllaDeHierro)
+	pedro.encuentra(memoriaRamDDR)
+	pedro.encuentra(unLibroDeAventuras)
+	assert.equals(900,pedro.cotizacion())
+}
+
+	
